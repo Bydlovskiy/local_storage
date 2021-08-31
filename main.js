@@ -5,10 +5,10 @@ const inForm = document.forms.signIn;
 
 // SIGN UP VALIDATION
 
-let firstNameExp = /^[a-zA-z]{2,}$/
-let lastNameExp = /^[a-zA-z]{2,}$/
-let emailExp = /^\w+@\w+\.\w+$/;
-let passwordExp = /^\w{4,15}$/;
+const firstNameExp = /^[a-zA-z]{2,}$/
+const lastNameExp = /^[a-zA-z]{2,}$/
+const emailExp = /^\w+@\w+\.\w+$/;
+const passwordExp = /^\w{4,15}$/;
 
 
 function validation(regExp,elem){
@@ -48,14 +48,37 @@ function checkForm(){
     }
 }
 
+// add to storage 
+class User {
+    constructor(firstName,lastName,email,password){
+        this.name = firstName;
+        this.surname = lastName;
+        this.email = email;
+        this.password = password
+    }
+}
+
+function createUserObj(name,surname,email,password){
+    const userName = upForm[name].value;
+    const userSurname = upForm[surname].value;
+    const userEmail = upForm[email].value;
+    const userPassword = upForm[password].value;
+    let us = new User(userName,userSurname,userEmail,userPassword);
+    return us;
+}
+
+function addToStorage(){
+    let key = createUserObj('firstName','lastName','email','password').name;
+    localStorage.setItem(key,JSON.stringify(createUserObj('firstName','lastName','email','password')))
+}
+
 upForm.addEventListener('submit',function(event){
     event.preventDefault();
     if( checkForm()){
+        addToStorage();
         upForm.reset();
-        removeValidClasses()
-
+        removeValidClasses();
     }
-   
 })
 
 
