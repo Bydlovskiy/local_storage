@@ -27,18 +27,35 @@ function runValidation(){
     validation(passwordExp,'password');
 }
 
+function removeValidClass(elem){
+    upForm[elem].classList.remove('is-valid', 'is-invalid')
+}
+
+function removeValidClasses(){
+    removeValidClass('firstName');
+    removeValidClass('lastName');
+    removeValidClass('email');
+    removeValidClass('password');
+}
+
 function checkForm(){
     runValidation();
     if(validation(firstNameExp,'firstName') && validation(lastNameExp,'lastName') && validation(emailExp,'email') && validation(passwordExp,'password')){
-        console.log('true');
+
+        return true
     } else {
-        console.log('false');
+        return false 
     }
 }
 
 upForm.addEventListener('submit',function(event){
     event.preventDefault();
-    checkForm();
+    if( checkForm()){
+        upForm.reset();
+        removeValidClasses()
+
+    }
+   
 })
 
 
