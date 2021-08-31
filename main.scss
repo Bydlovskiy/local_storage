@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    .signUpBlock, .signInBlock{ 
+        width: 500px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0);
+        text-align: center;
+        form{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            input[type=submit]{
+                width: 100%;
+            }
+            p{
+                position: absolute;
+                bottom: -73px;
+                left: 7px;
+                color: blue;
+                &:hover{
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .signUpBlock{
+        height: 400px;
+        top: 20%;
+    }
+    .signInBlock{
+        display: none;
+        height: 250px;
+        top: 30%;
+    }
+} 

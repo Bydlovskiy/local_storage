@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+body .signUpBlock, body .signInBlock {
+  width: 500px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  text-align: center;
+}
+
+body .signUpBlock form, body .signInBlock form {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+body .signUpBlock form input[type=submit], body .signInBlock form input[type=submit] {
+  width: 100%;
+}
+
+body .signUpBlock form p, body .signInBlock form p {
+  position: absolute;
+  bottom: -73px;
+  left: 7px;
+  color: blue;
+}
+
+body .signUpBlock form p:hover, body .signInBlock form p:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+body .signUpBlock {
+  height: 400px;
+  top: 20%;
+}
+
+body .signInBlock {
+  display: none;
+  height: 250px;
+  top: 30%;
+}
+/*# sourceMappingURL=main.css.map */
