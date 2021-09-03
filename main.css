@@ -8,6 +8,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  background-color: whitesmoke;
 }
 
 body .signUpBlock, body .signInBlock {
@@ -61,5 +62,58 @@ body .signInBlock {
   display: none;
   height: 250px;
   top: 30%;
+}
+
+body .profile {
+  background-color: white;
+  border-radius: 7px;
+  width: 400px;
+  height: 400px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: none;
+}
+
+body .profile img {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+
+body .profile input {
+  width: 100%;
+}
+
+body .profile .position, body .profile .userEmail {
+  font-size: 20px;
+  color: #b8b8b8;
+  position: relative;
+}
+
+body .profile .position::after {
+  content: '';
+  width: 30%;
+  height: 3px;
+  background-color: #b8b8b8;
+  position: absolute;
+  top: 40px;
+  left: 35%;
 }
 /*# sourceMappingURL=main.css.map */
