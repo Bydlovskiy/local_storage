@@ -61,8 +61,7 @@ function checkNoRepeat() {
     } else if (localStorage.length > 0 && !localStorage.getItem(upForm.email.value)) {
         return true;
     } else {
-        // return message for repeat
-        return false;
+        return 'this email is empty';
     }
 }
 
@@ -109,7 +108,6 @@ function getUserObj() {
     }
 }
 
-
 function checkPassword() {
     if (getUserObj().password == inForm.password.value) {
         return true
@@ -130,54 +128,56 @@ function showUserProfile() {
         setInfo(getUserName(), getUserEmail())
         document.querySelector('.profile').style.display = 'flex';
         document.querySelector('.signInBlock').style.display = 'none';
+        document.querySelector('.errorInMessage').style.display = 'none';
         inForm.reset();
     }
 }
 
 function errorMessage() {
     if(showUserProfile() != undefined){
-        console.log(showUserProfile());
+        document.querySelector('.errorInMessage').style.display = 'flex';
+        document.querySelector('.errorInMessage').textContent = showUserProfile();
     }
 }
 
-
-
-
 // user list
-
 
 function getUserName() {
     return getUserObj().name + ' ' + getUserObj().surname
 }
 
-
 function getUserEmail() {
     return getUserObj().email
 }
-
 function setInfo(name, email) {
     document.querySelector('.userName').textContent = name;
     document.querySelector('.userEmail').textContent = email;
 }
-
-
-
 
 // buttons
 
 document.querySelector('.goToSignIn').addEventListener('click', () => {
     document.querySelector('.signUpBlock').style.display = 'none';
     document.querySelector('.signInBlock').style.display = 'block';
+    document.querySelector('.errorSignUp').style.display = 'none';
+    upForm.reset()
 })
 
 document.querySelector('.goToSignUp').addEventListener('click', () => {
     document.querySelector('.signUpBlock').style.display = 'block';
     document.querySelector('.signInBlock').style.display = 'none';
+    document.querySelector('.errorInMessage').style.display = 'none';
+    inForm.reset();
 })
 
 upForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (checkForm() && checkNoRepeat()) {
+    if(checkNoRepeat() != true){
+        document.querySelector('.errorSignUp').style.display = 'flex';
+        document.querySelector('.errorSignUp').textContent = checkNoRepeat();
+    }
+    else if (checkForm() && checkNoRepeat()) {
+        document.querySelector('.errorSignUp').style.display = 'none';
         addToStorage();
         resetSignUpForm();
     }
@@ -185,8 +185,7 @@ upForm.addEventListener('submit', function (event) {
 
 inForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    // showUserProfile();
-    errorMessage()
+    errorMessage();
 })
 
 document.querySelector('.signOut').addEventListener('click', () => {

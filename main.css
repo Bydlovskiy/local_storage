@@ -11,7 +11,8 @@ body {
   background-color: whitesmoke;
 }
 
-body .signUpBlock, body .signInBlock {
+body .signUpBlock,
+body .signInBlock {
   width: 500px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   position: absolute;
@@ -21,7 +22,8 @@ body .signUpBlock, body .signInBlock {
   text-align: center;
 }
 
-body .signUpBlock form, body .signInBlock form {
+body .signUpBlock form,
+body .signInBlock form {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -37,18 +39,21 @@ body .signUpBlock form, body .signInBlock form {
       justify-content: space-around;
 }
 
-body .signUpBlock form input[type=submit], body .signInBlock form input[type=submit] {
+body .signUpBlock form input[type=submit],
+body .signInBlock form input[type=submit] {
   width: 100%;
 }
 
-body .signUpBlock form p, body .signInBlock form p {
+body .signUpBlock form p,
+body .signInBlock form p {
   position: absolute;
   bottom: -73px;
   left: 7px;
   color: blue;
 }
 
-body .signUpBlock form p:hover, body .signInBlock form p:hover {
+body .signUpBlock form p:hover,
+body .signInBlock form p:hover {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -56,12 +61,50 @@ body .signUpBlock form p:hover, body .signInBlock form p:hover {
 body .signUpBlock {
   height: 400px;
   top: 20%;
+  position: relative;
+}
+
+body .signUpBlock .errorSignUp {
+  position: absolute;
+  bottom: 97px;
+  left: 0px;
+  width: 200px;
+  height: 38px;
+  color: white;
+  background-color: red;
+  border-radius: 7px;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 body .signInBlock {
   display: none;
   height: 250px;
   top: 30%;
+  position: relative;
+}
+
+body .signInBlock .errorInMessage {
+  position: absolute;
+  bottom: 19px;
+  left: 0px;
+  width: 200px;
+  height: 38px;
+  color: white;
+  background-color: red;
+  border-radius: 7px;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 body .profile {
@@ -101,7 +144,8 @@ body .profile input {
   width: 100%;
 }
 
-body .profile .position, body .profile .userEmail {
+body .profile .position,
+body .profile .userEmail {
   font-size: 20px;
   color: #b8b8b8;
   position: relative;
