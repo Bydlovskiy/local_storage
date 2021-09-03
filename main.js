@@ -3,6 +3,7 @@
 
 const upForm = document.forms.signUp;
 const inForm = document.forms.signIn;
+let thisUser ;
 
 // SIGN UP  
 // regExp
@@ -61,7 +62,17 @@ function checkNoRepeat() {
     } else if (localStorage.length > 0 && !localStorage.getItem(upForm.email.value)) {
         return true;
     } else {
-        return 'this email is empty';
+        return 'this email is busy';
+    }
+}
+
+function errorUpMessage(){
+    if (checkNoRepeat() != true) {
+        document.querySelector('.errorSignUp').style.display = 'flex';
+        document.querySelector('.errorSignUp').textContent = checkNoRepeat();
+    } else {
+        document.querySelector('.errorSignUp').style.display = 'none';
+        return true
     }
 }
 
@@ -93,62 +104,65 @@ function addToStorage() {
 // SIGN IN
 
 function bust() {
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) == inForm.email.value) {
-            return localStorage.key(i);
+    if (localStorage.length == 0) {
+        emptyStorage();
+    } else {
+        for (let i = 0; i < localStorage.length; i++) {
+            if (localStorage.key(i) == inForm.email.value) {
+                getUserObj(localStorage.key(i));
+            } else {
+                wrongEmail()
+            }
         }
     }
-    return false
 }
 
-function getUserObj() {
-    if (!bust()) {} else {
-        const User = JSON.parse(localStorage.getItem(bust()));
-        return User;
-    }
+function getUserObj(key) {
+    thisUser = JSON.parse(localStorage.getItem(key));
+    checkPassword(thisUser);
 }
 
-function checkPassword() {
-    if (getUserObj().password == inForm.password.value) {
-        return true
+function checkPassword(us) {
+    if (us.password == inForm.password.value) {
+        showUserProfile();
     } else {
-        return false
-        // message wrong password
+        wrongPassword()
     }
+}
+
+function wrongPassword() {
+    document.querySelector('.errorInMessage').style.display = 'flex';
+    document.querySelector('.errorInMessage').textContent = 'wrong password';
+}
+
+function wrongEmail() {
+    document.querySelector('.errorInMessage').style.display = 'flex';
+    document.querySelector('.errorInMessage').textContent = 'wrong email';
+}
+
+function emptyStorage() {
+    document.querySelector('.errorInMessage').style.display = 'flex';
+    document.querySelector('.errorInMessage').textContent = 'local storage is empty';
 }
 
 function showUserProfile() {
-    if (localStorage.length == 0) {
-        return 'local storage is empty';
-    } else if (bust() == false) {
-        return 'wrong email';
-    } else if (checkPassword() == false) {
-        return 'wrong password';
-    } else if (checkPassword()) {
-        setInfo(getUserName(), getUserEmail())
-        document.querySelector('.profile').style.display = 'flex';
-        document.querySelector('.signInBlock').style.display = 'none';
-        document.querySelector('.errorInMessage').style.display = 'none';
-        inForm.reset();
-    }
-}
-
-function errorMessage() {
-    if(showUserProfile() != undefined){
-        document.querySelector('.errorInMessage').style.display = 'flex';
-        document.querySelector('.errorInMessage').textContent = showUserProfile();
-    }
+    setInfo(getUserName(), getUserEmail())
+    document.querySelector('.profile').style.display = 'flex';
+    document.querySelector('.signInBlock').style.display = 'none';
+    document.querySelector('.errorInMessage').style.display = 'none';
+    inForm.reset();
 }
 
 // user list
 
 function getUserName() {
-    return getUserObj().name + ' ' + getUserObj().surname
+    return thisUser.name + ' ' + thisUser.surname
 }
 
 function getUserEmail() {
-    return getUserObj().email
+    return thisUser.email
 }
+
 function setInfo(name, email) {
     document.querySelector('.userName').textContent = name;
     document.querySelector('.userEmail').textContent = email;
@@ -172,12 +186,7 @@ document.querySelector('.goToSignUp').addEventListener('click', () => {
 
 upForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    if(checkNoRepeat() != true){
-        document.querySelector('.errorSignUp').style.display = 'flex';
-        document.querySelector('.errorSignUp').textContent = checkNoRepeat();
-    }
-    else if (checkForm() && checkNoRepeat()) {
-        document.querySelector('.errorSignUp').style.display = 'none';
+     if (checkForm() && errorUpMessage()) {
         addToStorage();
         resetSignUpForm();
     }
@@ -185,10 +194,10 @@ upForm.addEventListener('submit', function (event) {
 
 inForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    errorMessage();
+    bust();
 })
 
-document.querySelector('.signOut').addEventListener('click', () => {
+document.querySelector('.signOut').addEventListener('click', function () {
     document.querySelector('.profile').style.display = 'none';
     document.querySelector('.signInBlock').style.display = 'block';
 })
